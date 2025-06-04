@@ -83,7 +83,7 @@ export default function ResultPage() {
         ]);
 
         if (insertError) {
-          console.error('Error saving result:', insertError);
+          console.log('Error saving result:', insertError);
           if (insertError.code === '23505') {
             // PostgreSQL unique constraint violation
             setError('⚠️ This name or email has already been used. Please use different details. ⚠️');
