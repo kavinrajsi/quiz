@@ -76,15 +76,15 @@ export default function ResultPage() {
         if (insertError) {
           console.error('Error saving result:', insertError);
           if (insertError.code === '23505') {
-            setError('⚠️ This name and email combination has already been used. Please use different details.');
+            setError('This name and email combination has already been used. Please use different details.');
           } else {
-            setError('⚠️ Something went wrong while saving your result. Please try again later.');
+            setError('Something went wrong while saving your result. Please try again later.');
           }
           return;
         }
       } catch (err) {
         console.error('Unexpected error:', err);
-        setError('⚠️ An unexpected error occurred. Please try again later.');
+        setError('An unexpected error occurred. Please try again later.');
       } finally {
         setIsSubmitting(false);
       }
@@ -98,7 +98,7 @@ export default function ResultPage() {
       <div className="bg-white shadow-xl rounded-xl px-10 py-12 max-w-lg w-full text-center transition-all duration-300">
         {error ? (
           <div className="text-red-500 text-center">
-            <h1 className="text-3xl font-bold text-red-700 mb-3">⚠️ Error</h1>
+            <h1 className="text-3xl font-bold text-red-700 mb-3">⚠️ Error ⚠️</h1>
             <p className="text-lg text-gray-700 mb-4">{error}</p>
           </div>
         ) : (
