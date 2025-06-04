@@ -32,30 +32,50 @@ export default function Home() {
     }
 
     setLoading(true);
+    setError('');
 
-    // Check if user already submitted
-    const { data, error: dbError } = await supabase
-      .from('quiz_results')
-      .select('id')
-      .eq('name', name.trim())
-      .eq('email', email.trim())
-      .maybeSingle();
+    try {
+      // Check if user already submitted by either name OR email
+      const { data: existingByName, error: nameError } = await supabase
+        .from('quiz_results')
+        .select('id, name, email')
+        .eq('name', name.trim())
+        .maybeSingle();
 
-    if (dbError) {
-      setError('Database error. Please try again.');
+      const { data: existingByEmail, error: emailError } = await supabase
+        .from('quiz_results')
+        .select('id, name, email')
+        .eq('email', email.trim())
+        .maybeSingle();
+
+      if (nameError || emailError) {
+        setError('Database error. Please try again.');
+        setLoading(false);
+        return;
+      }
+
+      // Check for duplicate name
+      if (existingByName) {
+        setError(`The name "${name.trim()}" has already been used. Please use a different name.`);
+        setLoading(false);
+        return;
+      }
+
+      // Check for duplicate email
+      if (existingByEmail) {
+        setError(`The email "${email.trim()}" has already been used. Please use a different email.`);
+        setLoading(false);
+        return;
+      }
+
+      // Save user data in context and continue
+      setUserData({ name: name.trim(), email: email.trim() });
+      router.push('/quiz');
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      setError('An unexpected error occurred. Please try again.');
       setLoading(false);
-      return;
     }
-
-    if (data) {
-      setError('You have already participated in the quiz.');
-      setLoading(false);
-      return;
-    }
-
-    // Save user data in context and continue
-    setUserData({ name: name.trim(), email: email.trim() });
-    router.push('/quiz');
   };
 
   return (
@@ -71,6 +91,7 @@ export default function Home() {
             setError('');
           }}
           className="w-full border border-gray-300 p-2 rounded text-black"
+          disabled={loading}
         />
         <input
           type="email"
@@ -81,15 +102,20 @@ export default function Home() {
             setError('');
           }}
           className="w-full border border-gray-300 p-2 rounded text-black"
+          disabled={loading}
         />
         {error && (
-          <div className="text-red-600 text-sm font-medium">{error}</div>
+          <div className="text-red-600 text-sm font-medium bg-red-50 p-3 rounded border border-red-200">
+            {error}
+          </div>
         )}
         <button
           onClick={startQuiz}
           disabled={loading}
-          className={`w-full py-2 rounded text-white hover:cursor-pointer ${
-            loading ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'
+          className={`w-full py-2 rounded text-white font-medium transition-colors ${
+            loading 
+              ? 'bg-gray-400 cursor-not-allowed' 
+              : 'bg-green-600 hover:bg-green-700 hover:cursor-pointer'
           }`}
         >
           {loading ? 'Checking...' : 'Start Quiz'}
