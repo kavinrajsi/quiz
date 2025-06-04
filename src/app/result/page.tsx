@@ -97,22 +97,10 @@ export default function ResultPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-green-50 p-6">
       <div className="bg-white shadow-xl rounded-xl px-10 py-12 max-w-lg w-full text-center transition-all duration-300">
         {error ? (
-          <>
-          <h1 className="text-3xl font-bold text-green-700 mb-3">🎉 Quiz Completed!</h1>
-          <p className="text-lg text-gray-700 mb-4">Your Score:</p>
-          <p className="text-5xl font-extrabold text-green-600 mb-6">{score}</p>
-
-          <Link
-            href="/leaderboard"
-            className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-medium px-6 py-3 rounded-md transition"
-          >
-            View Leaderboard
-          </Link>
-
-          <div className="mt-6 text-sm text-gray-400">
-            Thank you for participating in the Eco Awareness Quiz! 🌍
+          <div className="text-red-500 text-center">
+            <h1 className="text-3xl font-bold text-red-700 mb-3">⚠️ Error</h1>
+            <p className="text-lg text-gray-700 mb-4">{error}</p>
           </div>
-        </>
         ) : (
           <>
             <h1 className="text-3xl font-bold text-green-700 mb-3">🎉 Quiz Completed!</h1>
