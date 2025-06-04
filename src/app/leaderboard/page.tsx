@@ -2,8 +2,17 @@
 import { useEffect, useState } from 'react';
 import supabase from '@/lib/supabaseClient';
 
+// Define the type for leaderboard entries
+interface LeaderboardEntry {
+  id: number;
+  name: string;
+  score: number;
+  duration_text: string;
+  duration_seconds: number;
+}
+
 export default function Leaderboard() {
-  const [leaders, setLeaders] = useState([]);
+  const [leaders, setLeaders] = useState<LeaderboardEntry[]>([]);
 
   useEffect(() => {
     const fetchLeaders = async () => {
@@ -42,13 +51,9 @@ export default function Leaderboard() {
             ))}
           </tbody>
         </table>
-
-        <a
-          href="/"
-          className="mt-8 inline-block bg-gray-700 hover:bg-gray-800 text-white font-medium px-6 py-3 rounded-md transition"
-        >
-          Retake Quiz
-        </a>
+        {leaders.length === 0 && (
+          <p className="mt-6 text-gray-500">No results yet. Be the first to take the quiz!</p>
+        )}
       </div>
     </div>
   );
