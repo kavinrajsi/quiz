@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <div className="bg-gradient-to-br from-green-50 to-blue-50 flex flex-col items-center justify-center min-h-screen p-4">
       <div className="mb-6">
-        <img src="/logo.png" alt="Eco Quiz Logo" className="w-32 h-32 object-contain" />
+        <img src="/logo.svg" alt="Eco Quiz Logo" className="w-70 h-30 object-contain" />
       </div>
       <h1 className="text-3xl font-bold mb-6 text-green-700">🌱 Eco Awareness Quiz</h1>
       <div className="bg-white shadow-md rounded-md p-6 w-full max-w-md space-y-4">
@@ -115,10 +115,10 @@ export default function Home() {
         <button
           onClick={startQuiz}
           disabled={loading}
-          className={`w-full py-2 rounded text-white font-medium transition-colors ${
+          className={`w-full py-2 rounded text-white font-medium transition-colors bg-[#ef4130] ${
             loading 
-              ? 'bg-gray-400 cursor-not-allowed' 
-              : 'bg-green-600 hover:bg-green-700 hover:cursor-pointer'
+              ? 'bg-[#ef4130] cursor-not-allowed' 
+              : 'bg-[#ef4130] hover:bg-green-700 hover:cursor-pointer'
           }`}
         >
           {loading ? 'Checking...' : 'Start Quiz'}

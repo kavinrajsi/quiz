@@ -68,7 +68,7 @@ export default function QuizPage() {
             <button
               key={idx}
               onClick={() => handleAnswer(idx)}
-              className="w-full border border-gray-300 text-lg rounded-md py-3 px-4 hover:bg-green-500 hover:text-white transition-colors duration-150 text-left text-gray-800 hover:cursor-pointer"
+              className="w-full border border-gray-300 text-lg rounded-md py-3 px-4 hover:bg-[#ef4130] hover:text-white transition-colors duration-150 text-left text-gray-800 hover:cursor-pointer"
             >
               {option}
             </button>

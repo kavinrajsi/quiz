@@ -136,13 +136,13 @@ export default function ResultPage() {
             <div className="space-y-3">
               <Link
                 href="/leaderboard"
-                className="block w-full bg-purple-600 hover:bg-purple-700 text-white font-medium px-6 py-3 rounded-md transition"
+                className="block w-full bg-[#ef4130] text-white font-medium px-6 py-3 rounded-md transition"
               >
                 View Leaderboard
               </Link>
               <Link
                 href="/"
-                className="block w-full bg-gray-600 hover:bg-gray-700 text-white font-medium px-6 py-3 rounded-md transition hidden"
+                className="block w-full bg-[#ef4130] text-white font-medium px-6 py-3 rounded-md transition hidden"
               >
                 Try Again with Different Details
               </Link>
@@ -159,7 +159,7 @@ export default function ResultPage() {
 
             <Link
               href="/leaderboard"
-              className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-medium px-6 py-3 rounded-md transition"
+              className="inline-block bg-[#ef4130] text-white font-medium px-6 py-3 rounded-md transition"
             >
               View Leaderboard
             </Link>
